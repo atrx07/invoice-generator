@@ -83,3 +83,20 @@ textarea { resize: vertical; }
   .layout { display: block; padding: 0; }
   .invoice { border: none; box-shadow: none; border-radius: 0; padding: 0; }
 }
+
+/* ---------- Mobile ---------- */
+@media (max-width: 640px) {
+  .wrap { padding: 0 12px; }
+  .layout { padding: 16px 12px 32px; }
+  .grid2, .grid3 { grid-template-columns: 1fr; }
+  .item-row { grid-template-columns: 1fr 1fr 1fr 34px; }
+  .item-row .i-desc { grid-column: 1 / -1; }
+  .item-row .amt { text-align: right; }
+  .card { padding: 14px; }
+  .invoice { padding: 22px 18px; }
+  .inv-head { flex-direction: column; gap: 12px; }
+  .inv-title { text-align: left; }
+  .inv-meta { flex-direction: column; }
+  .dates { text-align: left; }
+  .inv-totals { width: 100%; }
+}
