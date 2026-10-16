@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Invoice Generator — Create Professional Invoices Online</title>
+  <meta name="description" content="Free online invoice generator. Create professional invoices in seconds — add your business details, line items, tax and download as PDF. No signup required." />
+  <meta name="keywords" content="free invoice generator, online invoice maker, create invoice PDF, freelance invoice template, GST invoice generator India" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://invoicegen.pages.dev/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Free Invoice Generator — Create Professional Invoices Online" />
+  <meta property="og:description" content="Create professional invoices in seconds. Add line items, tax, download as PDF. Free forever, no signup." />
+  <meta property="og:url" content="https://invoicegen.pages.dev/" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Free Invoice Generator" />
+  <meta name="twitter:description" content="Create professional invoices in seconds. Free forever, no signup." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧾</text></svg>" />
+  <link rel="stylesheet" href="styles.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Free Invoice Generator",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "description": "Free online invoice generator. Create professional invoices with line items, tax and PDF download. No signup required."
+  }
+  </script>
+</head>
+<body>
+  <header class="site-header no-print">
+    <div class="wrap">
+      <div class="brand">🧾 <strong>InvoiceGen</strong> <span class="tag">free forever</span></div>
+      <p class="subtitle">Create a professional invoice in seconds. Your data never leaves your browser.</p>
+    </div>
+  </header>
+
+  <main class="wrap layout">
+    <!-- ============ EDITOR ============ -->
+    <section class="editor no-print" aria-label="Invoice editor">
+      <div class="card">
+        <h2>Your business</h2>
+        <div class="grid2">
+          <label>Business name<input id="bizName" type="text" placeholder="Acme Studio" /></label>
+          <label>Email<input id="bizEmail" type="email" placeholder="hello@acme.com" /></label>
+        </div>
+        <label>Address<textarea id="bizAddr" rows="2" placeholder="Street, City, PIN"></textarea></label>
+        <div class="grid2">
+          <label>Phone<input id="bizPhone" type="tel" placeholder="+91 98765 43210" /></label>
+          <label>Tax ID / GSTIN <span class="opt">(optional)</span><input id="bizTaxId" type="text" placeholder="GSTIN" /></label>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Bill to</h2>
+        <div class="grid2">
+          <label>Client name<input id="clientName" type="text" placeholder="Client Co." /></label>
+          <label>Client email<input id="clientEmail" type="email" placeholder="client@co.com" /></label>
+        </div>
+        <label>Client address<textarea id="clientAddr" rows="2" placeholder="Street, City, PIN"></textarea></label>
+      </div>
+
+      <div class="card">
+        <h2>Invoice details</h2>
+        <div class="grid3">
+          <label>Invoice #<input id="invNum" type="text" /></label>
+          <label>Issue date<input id="invDate" type="date" /></label>
+          <label>Due date<input id="invDue" type="date" /></label>
+        </div>
+        <div class="grid2">
+          <label>Currency
+            <select id="currency">
+              <option value="INR" selected>INR (₹)</option>
+              <option value="USD">USD ($)</option>
+              <option value="EUR">EUR (€)</option>
+              <option value="GBP">GBP (£)</option>
+            </select>
+          </label>
+          <label>Tax %<input id="taxRate" type="number" min="0" max="100" step="0.01" value="0" /></label>
+        </div>
+        <label>Discount <span class="opt">(flat amount, optional)</span><input id="discount" type="number" min="0" step="0.01" value="0" /></label>
+      </div>
+
+      <div class="card">
+        <h2>Items <button id="addItem" class="btn small" type="button">+ Add item</button></h2>
+        <div id="items"></div>
+      </div>
+
+      <div class="card">
+        <h2>Notes <span class="opt">(optional)</span></h2>
+        <label class="sr">Notes<textarea id="notes" rows="3" placeholder="Payment terms, bank/UPI details, thank-you note…"></textarea></label>
+      </div>
+
+      <div class="actions">
+        <button id="downloadPdf" class="btn primary" type="button">⬇ Download PDF</button>
+        <button id="printBtn" class="btn" type="button">🖨 Print</button>
+        <button id="resetBtn" class="btn danger-ghost" type="button">Reset</button>
+      </div>
+      <p class="fineprint">Tip: your business details are saved in this browser only — nothing is uploaded anywhere.</p>
+    </section>
+
+    <!-- ============ PREVIEW ============ -->
+    <section class="preview-col" aria-label="Invoice preview">
+      <div id="invoice" class="invoice">
+        <div class="inv-head">
+          <div>
+            <h1 id="pBizName">Your Business</h1>
+            <p id="pBizAddr" class="muted"></p>
+            <p id="pBizContact" class="muted"></p>
+            <p id="pBizTaxId" class="muted"></p>
+          </div>
+          <div class="inv-title">
+            <span>INVOICE</span>
+            <strong id="pInvNum"></strong>
+          </div>
+        </div>
+        <div class="inv-meta">
+          <div><span class="lbl">Bill to</span><strong id="pClientName">—</strong><p id="pClientAddr" class="muted"></p><p id="pClientEmail" class="muted"></p></div>
+          <div class="dates"><div><span class="lbl">Issue date</span><strong id="pInvDate">—</strong></div><div><span class="lbl">Due date</span><strong id="pInvDue">—</strong></div></div>
+        </div>
+        <table class="inv-table">
+          <thead><tr><th>Description</th><th class="r">Qty</th><th class="r">Rate</th><th class="r">Amount</th></tr></thead>
+          <tbody id="pItems"></tbody>
+        </table>
+        <div class="inv-totals">
+          <div><span>Subtotal</span><strong id="pSubtotal"></strong></div>
+          <div id="rowDiscount" hidden><span>Discount</span><strong id="pDiscount"></strong></div>
+          <div id="rowTax" hidden><span id="pTaxLabel">Tax</span><strong id="pTax"></strong></div>
+          <div class="grand"><span>Total due</span><strong id="pTotal"></strong></div>
+        </div>
+        <p id="pNotes" class="inv-notes"></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer no-print">
+    <div class="wrap">
+      <p>Free invoice generator · no signup · your data stays in your browser.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
