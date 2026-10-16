@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://invoicegen.pages.dev/sitemap.xml
+Sitemap: https://free-invoicegen.pages.dev/sitemap.xml
